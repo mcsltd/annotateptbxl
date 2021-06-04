@@ -1,0 +1,362 @@
+{
+  "NORM": [
+    "Нормальная ЭКГ",
+    "Normal ECG"
+  ],
+  "CD": [
+    "Нарушения проведения",
+    "Conduction Disturbance"
+  ],
+  "MI": [
+    "Инфаркт миокарда",
+    "Myocardial Infarction"
+  ],
+  "HYP": [
+    "Гипертрофия",
+    "Hypertrophy"
+  ],
+  "STTC": [
+    "Изменения ST-T",
+    "ST/T change"
+  ],
+  "LAFB": [
+    "Блокада передней ветви левой ножки пучка Гиса",
+    "Left anterior fascicular block"
+  ],
+  "LPFB": [
+    "Блокада задней ветви левой ножки пучка Гиса",
+    "Left posterior fascicular block"
+  ],
+  "IRBBB": [
+    "Неполная блокада правой ножки пучка Гиса",
+    "Incomplete right bundle branch block"
+  ],
+  "ILBBB": [
+    "Неполная блокада левой ножки пучка Гиса",
+    "Incomplete left bundle branch block"
+  ],
+  "CLBBB": [
+    "Полная блокада левой ножки пучка Гиса",
+    "Complete left bundle branch block"
+  ],
+  "CRBBB": [
+    "Полная блокада правой ножки пучка Гиса",
+    "Complete right bundle branch block"
+  ],
+  "1AVB": [
+    "A-V блокада I ст",
+    "First degree AV block"
+  ],
+  "2AVB": [
+    "A-V блокада I ст",
+    "Second degree AV block"
+  ],
+  "3AVB": [
+    "A-V блокада I ст",
+    "Third degree AV block"
+  ],
+  "IVCD": [
+    "Неспецифические внутрижелудочковые блокады",
+    "Non-specific intraventricular conduction disturbance (block)"
+  ],
+  "WPW": [
+    "Синдом WPW",
+    "Wolff-Parkinson-White syndrome"
+  ],
+  "LVH": [
+    "Гипертрофия левого желудочка",
+    "Left ventricular hypertrophy"
+  ],
+  "RVH": [
+    "Гипертрофия правого желудочка",
+    "Right ventricular hypertrophy"
+  ],
+  "LAO/LAE": [
+    "Гипертрофия или перегрузка левого желудочка",
+    "Left atrial overload/enlargement"
+  ],
+  "RAO/RAE": [
+    "Гипертрофия или перегрузка правого желудочка",
+    "Right atrial overload/enlargement"
+  ],
+  "SEHYP": [
+    "Гипертрофия перегородки",
+    "Septal hypertrophy"
+  ],
+  "AMI": [
+    "Передний инфаркт миокарда",
+    "Anterior myocardial infarction"
+  ],
+  "ASMI": [
+    "Переднеперегородочный инфаркт миокарда",
+    "Anterioseptal myocardial infarction"
+  ],
+  "ALMI": [
+    "Переднебоковой инфаркт миокарда",
+    "Anteriolateral myocardial infarction"
+  ],
+  "INJAS": [
+    "Субэндокардиальное повреждение в передне-перегородочных отведениях",
+    "Subendocardial injury in anteroseptal leads"
+  ],
+  "INJAL": [
+    "Субэндокардиальное повреждение в передне-боковых отведениях",
+    "Subendocardial injury in anterolateral leads"
+  ],
+  "INJLA": [
+    "Субэндокардиальное повреждение в передне-боковых отведениях",
+    "Subendocardial injury in lateral leads"
+  ],
+  "IMI": [
+    "Нижний инфаркт миокарда",
+    "Inferior myocardial infarction"
+  ],
+  "ILMI": [
+    "Нижне-боковой инфаркт миокарда",
+    "Inferolateral myocardial infarction"
+  ],
+  "IPLMI": [
+    "Нижне-задне-боковой инфаркт миокарда",
+    "Inferoposterolateral myocardial infarction"
+  ],
+  "IPMI": [
+    "Нижне-задний инфаркт миокарда",
+    "Inferoposterior myocardial infarction"
+  ],
+  "INJIN": [
+    "Субэндокардиальное повреждение в нижних отведениях",
+    "Subendocardial injury in inferior leads"
+  ],
+  "INJIL": [
+    "Субэндокардиальное повреждение в нижнелатеральных отведениях",
+    "Subendocardial injury in inferolateral leads"
+  ],
+  "LMI": [
+    "Боковой инфаркт миокарда",
+    "Lateral myocardial infarction"
+  ],
+  "PMI": [
+    "Задний инфаркт миокарда",
+    "Posterior myocardial infarction"
+  ],
+  "ISCA": [
+    "Признаки ишемии передней стенки",
+    "Ischemic in anterior leads"
+  ],
+  "ISCAL": [
+    "Признаки ишемии в передне-боковых отведениях",
+    "Ischemic in anterolateral leads"
+  ],
+  "ISCAN": [
+    "Признаки ишемии в передних отведениях",
+    "Ischemic in anterior leads"
+  ],
+  "ISCAS": [
+    "Признаки ишемии в передне-перегородочных отведениях",
+    "Ischemic in anteroseptal leads"
+  ],
+  "ISCLA": [
+    "Признаки ишемии в боковых отведениях",
+    "Ischemic in lateral leads"
+  ],
+  "ISCI": [
+    "Признаки ишемии нижней стенки",
+    "Ischemic in inferior leads"
+  ],
+  "ISCIN": [
+    "Признаки ишемии в нижних отведениях",
+    "Ischemic in inferior leads"
+  ],
+  "ISCIL": [
+    "Признаки ишемии в нижне-боковых отведениях",
+    "Ischemic in inferolateral leads"
+  ],
+  "ISC_": [
+    "Неспецифические ишемические измерения",
+    "Non-specific ischemic"
+  ],
+  "DIG": [
+    "Эффект дигиталиса",
+    "Digitalis effect"
+  ],
+  "LNGQT": [
+    "Удлинение интервала QT",
+    "Long QT interval"
+  ],
+  "EL": [
+    "Электролитные нарушения1",
+    "Electrolytic disturbance or drug (former EDIS)"
+  ],
+  "ANEUR": [
+    "Изменения, характерные для аневризмы желудочка",
+    "ST-T changes compatible with ventricular aneurysm"
+  ],
+  "NST_": [
+    "Неспецифические изменения ST",
+    "Non-specific ST changes"
+  ],
+  "SR": [
+    "Синусовый ритм",
+    "Sinus rhythm"
+  ],
+  "STACH": [
+    "Синусовая тахикарди",
+    "Sinus tachycardia"
+  ],
+  "SBRAD": [
+    "Синусовая брадикардия",
+    "Sinus bradycardia"
+  ],
+  "SARRH": [
+    "Синусовая аритмия",
+    "Sinus arrhythmia"
+  ],
+  "SVTAC": [
+    "Суправентрикулярная тахикардия",
+    "Supraventricular tachycardia"
+  ],
+  "PSVT": [
+    "Пароксизмальная суправентрикулярная тахикардия",
+    "Paroxysmal supraventricular tachycardia"
+  ],
+  "SVARR": [
+    "Суправентрикулярная аритмия",
+    "Supraventricular arrhythmia"
+  ],
+  "AFIB": [
+    "Фибрилляция предсердий",
+    "Atrial fibrillation"
+  ],
+  "AFLT": [
+    "Трепетание предсердий",
+    "Atrial flutter"
+  ],
+  "PVC": [
+    "Желудочковая экстрасистола",
+    "Ventricular premature complex"
+  ],
+  "PAC": [
+    "Предсердная экстрасистола",
+    "Atrial premature complex"
+  ],
+  "LPR": [
+    "Удлинение интервала PR",
+    "Prolonged PR interval"
+  ],
+  "PRC(S)": [
+    "Преждевременные комплексы2",
+    "Premature complex(es)"
+  ],
+  "BIGU": [
+    "Бигеминия, любого происхождения",
+    "Bigeminal pattern (unknown origin, SV or Ventricular)"
+  ],
+  "TRIGU": [
+    "Тригеминия, любого происхождения",
+    "Trigeminal pattern (unknown origin, SV or Ventricular)"
+  ],
+  "PACE": [
+    "Нормальное функционирование ИВР",
+    "Normal functioning artificial pacemaker"
+  ],
+  "NDT": [
+    "Аномалии зубца T без диагностического значения",
+    "Non-diagnostic T abnormalities"
+  ],
+  "NT_": [
+    "Неспецифические изменения зубца T",
+    "Non-specific T-wave changes"
+  ],
+  "TAB_": [
+    "Аномалии зубца Т",
+    "T-wave abnormality"
+  ],
+  "INVT": [
+    "Отрицательный зубец T",
+    "Inverted T-waves"
+  ],
+  "LOWT": [
+    "Низкая амплитуда зубцов T",
+    "Low amplitude T-waves"
+  ],
+  "STE_": [
+    "Неспецифическая элевация сегмента ST",
+    "Non-specific ST elevation"
+  ],
+  "STD_": [
+    "Неспецифическая депрессия ST",
+    "Non-specific ST depression"
+  ],
+  "LVOLT": [
+    "Низкий вольтаж QRS",
+    "Low QRS voltages in the frontal and horizontal leads"
+  ],
+  "HVOLT": [
+    "Высокий вольтаж QRS",
+    "High QRS voltage"
+  ],
+  "QWAVE": [
+    "Наличие зубца Q, не диагностический",
+    "Q waves present"
+  ],
+  "ABQRS": [
+    "Аномальная форма QRS",
+    "Abnormal QRS"
+  ],
+  "UNK": [
+    "Неопределенная ЭОС",
+    "Unknown axis"
+  ],
+  "MID": [
+    "Нормальное положение ЭОС",
+    "Normal axis"
+  ],
+  "LAD": [
+    "Отклонение ЭОС влево",
+    "Left axis deviation"
+  ],
+  "ALAD": [
+    "Выраженное отклонение ЭОС влево",
+    "Abnormal LAD, extreme left axis deviation"
+  ],
+  "RAD": [
+    "Отклонение ЭОС вправо",
+    "Right axis deviation"
+  ],
+  "ARAD": [
+    "Выраженное отклонение ЭОС вправо",
+    "Abnormal RAD, extreme right axis deviation"
+  ],
+  "AXL": [
+    "Горизонтальное положение ЭОС",
+    "Horizontal axis"
+  ],
+  "AXR": [
+    "Вертикальное положение ЭОС",
+    "Vertical axis"
+  ],
+  "SAG": [
+    "ЭКГ типа SI – SII – SIII",
+    "Saggital type (S1-S2-S3 Pattern)"
+  ],
+  "Stadium I": [
+    "Острый",
+    "Acut"
+  ],
+  "Stadium I–II": [
+    "Острый",
+    "Acut/subacut"
+  ],
+  "Stadium II": [
+    "Недавний",
+    "Recent"
+  ],
+  "Stadium II–III": [
+    "Недавний",
+    "Subacut/recent"
+  ],
+  "Stadium III": [
+    "Старый",
+    "Old"
+  ]
+}
