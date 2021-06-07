@@ -4,6 +4,7 @@ import json
 import argparse
 import pandas
 from datetime import datetime
+import re
 
 InputPaths = namedtuple("InputPaths", ["dict_file", "ann_file", "out_dir"])
 
@@ -114,6 +115,11 @@ def _create_ann_comment(row, ptbxl_dict):
             code_text = _add_mi_stage(row, code_text, ptbxl_dict)
         _appent_to_rows(text, code_text)
 
+    extra_beats = row[Text.Csv.EXTRA_BEATS]
+    if extra_beats:
+        lines = _extra_beat_conclusion(extra_beats)
+        _appent_to_rows(text, lines)
+
 
 def _appent_to_rows(rows, items):
     for i, item in enumerate(items):
@@ -132,6 +138,29 @@ def _add_mi_stage(row, mi_text, ptbxl_dict):
         return mi_text
     return [stage_text[i] + x[0].lower() + x[1:]
             for (i, x) in enumerate(mi_text)]
+
+
+def _extract_first_number(text):
+    number = 0
+    factor = 1
+    for c in text:
+        if not c.isdiget():
+            break
+        if number is None:
+            number = 0
+        number *= factor
+        number += int(c)
+        factor *= 10
+    return number
+
+
+def _extra_beat_conclusion(extra_beats_text):
+    result_text = ["Обнаружены экстрасистолы", "Premature complexes detected"]
+    number = _extract_first_number(extra_beats_text)
+    if number is None:
+        return result_text
+    tail = " (%d)" % number
+    return [x + tail for x in result_text]
 
 
 if __name__ == "__main__":
