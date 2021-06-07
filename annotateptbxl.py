@@ -34,6 +34,7 @@ class Text():
         JA_PACEMAKER = "ja, pacemaker"
         MI = "MI"
         UNKNOWN = "unknown"
+        PACE_CODE = "PACE"
 
     class Other():
         DATABASE = "PTB-XL"
@@ -109,6 +110,7 @@ def _create_ann_comment(row, ptbxl_dict):
     _appent_to_rows(text, axis)
 
     codes = json.loads(row[Text.Csv.SCP_CODES])
+    _check_pacemaker(row, codes)
     for code in codes:
         code_text = ptbxl_dict[code]
         if code.endswith(Text.Csv.MI):
@@ -155,12 +157,20 @@ def _extract_first_number(text):
 
 
 def _extra_beat_conclusion(extra_beats_text):
+    # TODO: check type of premature complexes
     result_text = ["Обнаружены экстрасистолы", "Premature complexes detected"]
     number = _extract_first_number(extra_beats_text)
     if number is None:
         return result_text
     tail = " (%d)" % number
     return [x + tail for x in result_text]
+
+
+def _check_pacemaker(row, codes):
+    if Text.Csv.PACE_CODE in codes:
+        return
+    if row[Text.Csv.PACEMAKER] == Text.Csv.JA_PACEMAKER:
+        codes[Text.Csv.PACE_CODE] = 0.0
 
 
 if __name__ == "__main__":
