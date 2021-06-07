@@ -1,12 +1,13 @@
-import os
-from collections import namedtuple, OrderedDict
-import json
 import argparse
-import pandas
+import codecs
+import json
+import os
+from collections import OrderedDict, namedtuple
 from datetime import datetime
-import re
 
-InputPaths = namedtuple("InputPaths", ["dict_file", "ann_file", "out_dir"])
+import pandas
+
+InputPaths = namedtuple("InputPaths", ["ann_file", "dict_file", "out_dir"])
 
 
 class Text():
@@ -35,6 +36,7 @@ class Text():
         MI = "MI"
         UNKNOWN = "unknown"
         PACE_CODE = "PACE"
+        UNK_CODE = "UNK"
 
     class Other():
         DATABASE = "PTB-XL"
@@ -65,8 +67,11 @@ def _parse_args(argv):
 
 
 def _create_annotations(ann_file, dict_file):
-    ptbxl_dict = json.load(dict_file)
+    with codecs.open(dict_file, "r", encoding="utf-8") as fin:
+        ptbxl_dict = json.load(fin)
     table = pandas.read_csv(ann_file)
+    table[Text.Csv.HEART_AXIS].fillna(Text.Csv.UNK_CODE, inplace=True)
+
     annotations = {}
     for _, row in table.iterrows():
         record_name = row[Text.Csv.ECG_ID]
@@ -106,7 +111,7 @@ def _write(annotations, out_dir):
 def _create_ann_comment(row, ptbxl_dict):
     text = ["Аннотация PTB-XL:", "PTB-XL annotation:"]
 
-    axis = ptbxl_dict[row[Text.Csv.HEART_AXIS]]
+    axis = ptbxl_dict[row.get(Text.Csv.HEART_AXIS, default=Text.Csv.UNK_CODE)]
     _appent_to_rows(text, axis)
 
     codes = json.loads(row[Text.Csv.SCP_CODES])
@@ -121,6 +126,9 @@ def _create_ann_comment(row, ptbxl_dict):
     if extra_beats:
         lines = _extra_beat_conclusion(extra_beats)
         _appent_to_rows(text, lines)
+
+    united_lines = ["\n".join(x) for x in text]
+    return united_lines[0] + "\n\n" + united_lines[1]
 
 
 def _appent_to_rows(rows, items):
