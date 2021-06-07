@@ -49,7 +49,9 @@ INFARCTION_COLUMNS = [
 
 def main():
     paths = _parse_args(os.sys.argv)
-    annotations = _create_annotations(paths.ann_file, paths.dict_file)
+    ann_table = _read_ann_table(paths.ann_file)
+    ptbxl_dict = _read_ptbxl_dict(paths.dict_file)
+    annotations = _create_annotations(ann_table, ptbxl_dict)
     _write(annotations, paths.out_dir)
 
 
@@ -66,14 +68,9 @@ def _parse_args(argv):
     )
 
 
-def _create_annotations(ann_file, dict_file):
-    with codecs.open(dict_file, "r", encoding="utf-8") as fin:
-        ptbxl_dict = json.load(fin)
-    table = pandas.read_csv(ann_file)
-    table[Text.Csv.HEART_AXIS].fillna(Text.Csv.UNK_CODE, inplace=True)
-
+def _create_annotations(ann_table, ptbxl_dict):
     annotations = {}
-    for _, row in table.iterrows():
+    for _, row in ann_table.iterrows():
         record_name = row[Text.Csv.ECG_ID]
         ann = _init_annotation(record_name)
         ann[Text.Json.COMMENT] = _create_ann_comment(row, ptbxl_dict)
@@ -179,6 +176,17 @@ def _check_pacemaker(row, codes):
         return
     if row[Text.Csv.PACEMAKER] == Text.Csv.JA_PACEMAKER:
         codes[Text.Csv.PACE_CODE] = 0.0
+
+
+def _read_ptbxl_dict(path):
+    with codecs.open(path, "r", encoding="utf-8") as fin:
+        return json.load(fin)
+
+
+def _read_ann_table(path):
+    ann_table = pandas.read_csv(path)
+    ann_table[Text.Csv.HEART_AXIS].fillna(Text.Csv.UNK_CODE, inplace=True)
+    return ann_table
 
 
 if __name__ == "__main__":
