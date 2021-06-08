@@ -5,7 +5,7 @@ import os
 from collections import OrderedDict, namedtuple
 from datetime import datetime
 
-import pandas
+import pandas as pd
 
 InputPaths = namedtuple("InputPaths", ["ann_file", "dict_file", "out_dir"])
 
@@ -45,6 +45,7 @@ class Text():
 INFARCTION_COLUMNS = [
     Text.Csv.INFARCTION_STADIUM + "1",  Text.Csv.INFARCTION_STADIUM + "2"
 ]
+UTF_8_ENCODING = "utf-8"
 
 
 def main():
@@ -71,7 +72,7 @@ def _parse_args(argv):
 def _create_annotations(ann_table, ptbxl_dict):
     annotations = {}
     for _, row in ann_table.iterrows():
-        record_name = row[Text.Csv.ECG_ID]
+        record_name = _get_record_name(row[Text.Csv.ECG_ID])
         ann = _init_annotation(record_name)
         ann[Text.Json.COMMENT] = _create_ann_comment(row, ptbxl_dict)
         annotations[record_name] = ann
@@ -100,18 +101,20 @@ def _get_record_name(ecg_id):
 def _write(annotations, out_dir):
     os.makedirs(out_dir, exist_ok=True)
     for name, ann in annotations.items():
-        filename = name + ".json"
-        with open(filename, "w") as fout:
-            json.dump(ann, fout, ensure_ascii=True, indent=2)
+        # TODO: fix escaped strings
+        filename = os.path.join(out_dir, name + ".json")
+        with codecs.open(filename, "w", encoding=UTF_8_ENCODING) as fout:
+            json.dump(ann, fout, ensure_ascii=False, indent=2)
 
 
 def _create_ann_comment(row, ptbxl_dict):
-    text = ["Аннотация PTB-XL:", "PTB-XL annotation:"]
+    text = [["Аннотация PTB-XL:"], ["PTB-XL annotation:"]]
 
     axis = ptbxl_dict[row.get(Text.Csv.HEART_AXIS, default=Text.Csv.UNK_CODE)]
     _appent_to_rows(text, axis)
 
-    codes = json.loads(row[Text.Csv.SCP_CODES])
+    codes = row[Text.Csv.SCP_CODES].replace("'", '"')
+    codes = json.loads(codes)
     _check_pacemaker(row, codes)
     for code in codes:
         code_text = ptbxl_dict[code]
@@ -120,7 +123,7 @@ def _create_ann_comment(row, ptbxl_dict):
         _appent_to_rows(text, code_text)
 
     extra_beats = row[Text.Csv.EXTRA_BEATS]
-    if extra_beats:
+    if not pd.isna(extra_beats):
         lines = _extra_beat_conclusion(extra_beats)
         _appent_to_rows(text, lines)
 
@@ -138,7 +141,7 @@ def _add_mi_stage(row, mi_text, ptbxl_dict):
     stage_text = None
     for col in INFARCTION_COLUMNS:
         stage = row[col]
-        if stage and stage != Text.Csv.UNKNOWN:
+        if not pd.isna(stage) and stage != Text.Csv.UNKNOWN:
             stage_text = ptbxl_dict[stage]
             break
     if stage_text is None:
@@ -148,10 +151,10 @@ def _add_mi_stage(row, mi_text, ptbxl_dict):
 
 
 def _extract_first_number(text):
-    number = 0
+    number = None
     factor = 1
     for c in text:
-        if not c.isdiget():
+        if not c.isdigit():
             break
         if number is None:
             number = 0
@@ -179,12 +182,12 @@ def _check_pacemaker(row, codes):
 
 
 def _read_ptbxl_dict(path):
-    with codecs.open(path, "r", encoding="utf-8") as fin:
+    with codecs.open(path, "r", encoding=UTF_8_ENCODING) as fin:
         return json.load(fin)
 
 
 def _read_ann_table(path):
-    ann_table = pandas.read_csv(path)
+    ann_table = pd.read_csv(path)
     ann_table[Text.Csv.HEART_AXIS].fillna(Text.Csv.UNK_CODE, inplace=True)
     return ann_table
 
