@@ -117,7 +117,9 @@ def _create_ann_comment(row, ptbxl_dict):
     codes = json.loads(codes)
     _check_pacemaker(row, codes)
     for code in codes:
-        code_text = ptbxl_dict[code]
+        code_text = ptbxl_dict.get(code)
+        if code_text is None:
+            continue
         if code.endswith(Text.Csv.MI):
             code_text = _add_mi_stage(row, code_text, ptbxl_dict)
         _appent_to_rows(text, code_text)
