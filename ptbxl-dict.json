@@ -358,5 +358,21 @@
   "Stadium III": [
     "Старый",
     "Old"
+  ],
+  "ES": [
+    "Экстрасистола(ы)",
+    "Premature complex(es)"
+  ],
+  "ES(2Typen)": [
+    "Полиморфная(ые) экстрасистола(ы)",
+    "Polymorph premature complex(es)"
+  ],
+  "SVES": [
+    "Cуправентрикулярная(ые) экстрасистола(ы)",
+    "Supraventricular premature complex(es)"
+  ],
+  "VES": [
+    "Желудочковая(ые) экстрасистола(ы)",
+    "Ventricular premature complex(es)"
   ]
 }
