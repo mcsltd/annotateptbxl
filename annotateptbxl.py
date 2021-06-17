@@ -47,6 +47,7 @@ INFARCTION_COLUMNS = [
     Text.Csv.INFARCTION_STADIUM + "1",  Text.Csv.INFARCTION_STADIUM + "2"
 ]
 UTF_8_ENCODING = "utf-8"
+DEFAULT_EXTRA_BEATS_CODE = "ES"
 
 
 def main():
@@ -170,17 +171,21 @@ def _extract_first_number(text):
 
 
 def _extra_beat_conclusion(extra_beats_text, ptbxl_dict):
-    lowercase_dict = {k.lower(): v for k, v in ptbxl_dict.items()}
-    lines = []
-    for part in re.split(r";|,", extra_beats_text.lower()):
+    def _try_get_upper(dict_, key):
+        return dict_.get(key) or dict_.get(key.upper())
+
+    lines = [[], []]
+    for part in re.split(r";|,", extra_beats_text):
         text = None
         number = _extract_first_number(part)
         if number is None:
             clean_part = _remove_digits(part)
-            text = lowercase_dict.get(clean_part)
+            text = _try_get_upper(ptbxl_dict, clean_part)
         else:
             code = part[len(str(number)):]
-            raw_text = lowercase_dict[code]
+            if not code:
+                code = DEFAULT_EXTRA_BEATS_CODE
+            raw_text = _try_get_upper(ptbxl_dict, code)
             text = ["{0}: {1}".format(x, number) for x in raw_text]
         if text is not None:
             _append_to_rows(lines, text)
