@@ -112,7 +112,7 @@ def _create_ann_comment(row, ptbxl_dict):
     text = [["Аннотация PTB-XL:"], ["PTB-XL annotation:"]]
 
     axis = ptbxl_dict[row.get(Text.Csv.HEART_AXIS, default=Text.Csv.UNK_CODE)]
-    _appent_to_rows(text, axis)
+    _append_to_rows(text, axis)
 
     codes = row[Text.Csv.SCP_CODES].replace("'", '"')
     codes = json.loads(codes)
@@ -123,18 +123,18 @@ def _create_ann_comment(row, ptbxl_dict):
             continue
         if code.endswith(Text.Csv.MI):
             code_text = _add_mi_stage(row, code_text, ptbxl_dict)
-        _appent_to_rows(text, code_text)
+        _append_to_rows(text, code_text)
 
     extra_beats = row[Text.Csv.EXTRA_BEATS]
     if not pd.isna(extra_beats):
         lines = _extra_beat_conclusion(extra_beats, ptbxl_dict)
-        _appent_to_rows(text, lines)
+        _append_to_rows(text, lines)
 
     united_lines = ["\n".join(x) for x in text]
     return united_lines[0] + "\n\n" + united_lines[1]
 
 
-def _appent_to_rows(rows, items):
+def _append_to_rows(rows, items):
     if not rows:
         return items
     for i, item in enumerate(items):
@@ -183,7 +183,7 @@ def _extra_beat_conclusion(extra_beats_text, ptbxl_dict):
             raw_text = lowercase_dict[code]
             text = ["{0}: {1}".format(x, number) for x in raw_text]
         if text is not None:
-            _appent_to_rows(lines, text)
+            _append_to_rows(lines, text)
     return lines
 
 
