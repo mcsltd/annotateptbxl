@@ -102,7 +102,6 @@ def _get_record_name(ecg_id):
 def _write(annotations, out_dir):
     os.makedirs(out_dir, exist_ok=True)
     for name, ann in annotations.items():
-        # TODO: fix escaped strings
         filename = os.path.join(out_dir, name + ".json")
         with codecs.open(filename, "w", encoding=UTF_8_ENCODING) as fout:
             json.dump(ann, fout, ensure_ascii=False, indent=2)
@@ -135,10 +134,11 @@ def _create_ann_comment(row, ptbxl_dict):
 
 
 def _append_to_rows(rows, items):
-    if not rows:
-        return items
     for i, item in enumerate(items):
-        rows[i].append(item)
+        if isinstance(item, list):
+            rows[i] += item
+        else:
+            rows[i].append(item)
     return items
 
 
