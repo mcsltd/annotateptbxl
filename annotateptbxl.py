@@ -2,6 +2,7 @@ import argparse
 import codecs
 import json
 import os
+import re
 from collections import OrderedDict, namedtuple
 from datetime import datetime
 
@@ -126,7 +127,7 @@ def _create_ann_comment(row, ptbxl_dict):
 
     extra_beats = row[Text.Csv.EXTRA_BEATS]
     if not pd.isna(extra_beats):
-        lines = _extra_beat_conclusion(extra_beats)
+        lines = _extra_beat_conclusion(extra_beats, ptbxl_dict)
         _appent_to_rows(text, lines)
 
     united_lines = ["\n".join(x) for x in text]
@@ -168,14 +169,22 @@ def _extract_first_number(text):
     return number
 
 
-def _extra_beat_conclusion(extra_beats_text):
-    # TODO: check type of premature complexes
-    result_text = ["Обнаружены экстрасистолы", "Premature complexes detected"]
-    number = _extract_first_number(extra_beats_text)
-    if number is None:
-        return result_text
-    tail = " (%d)" % number
-    return [x + tail for x in result_text]
+def _extra_beat_conclusion(extra_beats_text, ptbxl_dict):
+    lowercase_dict = {k.lower(): v for k, v in ptbxl_dict.items()}
+    lines = []
+    for part in re.split(r";|,", extra_beats_text.lower()):
+        text = None
+        number = _extract_first_number(part)
+        if number is None:
+            clean_part = _remove_digits(part)
+            text = lowercase_dict.get(clean_part)
+        else:
+            code = part[len(str(number)):]
+            raw_text = lowercase_dict[code]
+            text = ["{0}: {1}".format(x, number) for x in raw_text]
+        if text is not None:
+            _appent_to_rows(lines, text)
+    return lines
 
 
 def _check_pacemaker(row, codes):
