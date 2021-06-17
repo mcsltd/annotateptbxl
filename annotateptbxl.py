@@ -134,6 +134,8 @@ def _create_ann_comment(row, ptbxl_dict):
 
 
 def _appent_to_rows(rows, items):
+    if not rows:
+        return items
     for i, item in enumerate(items):
         rows[i].append(item)
     return items
