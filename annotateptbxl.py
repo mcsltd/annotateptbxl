@@ -144,6 +144,8 @@ def _append_to_rows(rows, items):
 
 
 def _add_mi_stage(row, mi_text, ptbxl_dict):
+    def _add_stage(stage, mi):
+        return "{0} {1}{2}".format(stage, mi[0].lower(), mi[1:])
     stage_text = None
     for col in INFARCTION_COLUMNS:
         stage = row[col]
@@ -152,8 +154,7 @@ def _add_mi_stage(row, mi_text, ptbxl_dict):
             break
     if stage_text is None:
         return mi_text
-    return [stage_text[i] + x[0].lower() + x[1:]
-            for (i, x) in enumerate(mi_text)]
+    return [_add_stage(stage_text[i], x) for (i, x) in enumerate(mi_text)]
 
 
 def _extract_first_number(text):
