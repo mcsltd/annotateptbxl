@@ -196,5 +196,9 @@ def _read_ann_table(path):
     return ann_table
 
 
+def _remove_digits(text):
+    return "".join(c for c in text if not c.isdigit())
+
+
 if __name__ == "__main__":
     main()
