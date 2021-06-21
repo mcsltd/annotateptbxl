@@ -40,7 +40,7 @@ class Text():
         UNK_CODE = "UNK"
 
     class Other():
-        DATABASE = "PTB-XL"
+        DATABASE = "PTB-XL ECG Dataset"
 
 
 INFARCTION_COLUMNS = [
