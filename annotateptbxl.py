@@ -59,7 +59,7 @@ def main():
 
 
 def _parse_args(argv):
-    parser = argparse.ArgumentParser("PTB-XL annotations")
+    parser = argparse.ArgumentParser(description="PTB-XL annotations")
     parser.add_argument("ann_file")
     parser.add_argument("dict_file")
     parser.add_argument("out_dir")
