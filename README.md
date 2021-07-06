@@ -1,6 +1,6 @@
 # annotateptbxl
 
-The program is used to convert annotations of the PTB-XL database into annotations in the ecg.ru [format](https://github.com/mcsltd/ecganncompare/blob/master/docs/formats.md#input-files-format).
+The program is used to convert annotations of the PTB-XL database into annotations in the [ecg.ru](ecg.ru) [format](https://github.com/mcsltd/ecganncompare/blob/master/docs/formats.md#input-files-format).
 
 ## Resources
 
@@ -28,7 +28,7 @@ Annotations from the CSV are converted into text form and written in the `commen
 - `annotator`: PTB-XL annotators,
 - `database`: PTB-XL ECG Dataset,
 - `conclusionThesaurus`: PTB-XL,
-- `conclusions`: _empty field, []_,
+- `conclusions`: _empty array, []_,
 - `record`: _record id_.
 
 ### Output file example
