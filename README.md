@@ -30,3 +30,19 @@ Annotations from the CSV are converted into text form and written in the `commen
 - `conclusionThesaurus`: PTB-XL,
 - `conclusions`: _empty field, []_,
 - `record`: _record id_.
+
+### Output file example
+
+```json
+{
+  "version": 1,
+  "type": "STANDARD",
+  "date": "2021-06-21T08:35:06.835255Z",
+  "annotator": "PTB-XL annotators",
+  "database": "PTB-XL ECG Dataset",
+  "record": "00001_hr",
+  "conclusionThesaurus": "PTB-XL ECG Dataset",
+  "conclusions": [],
+  "comment": "Аннотация PTB-XL:\nНеопределенная ЭОС\nНормальная ЭКГ\nНизкий вольтаж QRS\nСинусовый ритм\n\nPTB-XL annotation:\nUnknown axis\nNormal ECG\nLow QRS voltages in the frontal and horizontal leads\nSinus rhythm"
+}
+```
