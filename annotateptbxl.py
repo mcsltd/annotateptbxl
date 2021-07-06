@@ -60,9 +60,13 @@ def main():
 
 def _parse_args(argv):
     parser = argparse.ArgumentParser(description="PTB-XL annotations")
-    parser.add_argument("ann_file")
-    parser.add_argument("dict_file")
-    parser.add_argument("out_dir")
+    parser.add_argument(
+        "ann_file", help="Path to CSV-file with PTB-XL annotations")
+    parser.add_argument(
+        "dict_file",
+        help="Path to JSON-file with PTB-XL annotation codes description")
+    parser.add_argument(
+        "out_dir", help="Directory path for result annotation files")
     paths = parser.parse_args(argv[1:])
     return InputPaths(
         paths.ann_file,
