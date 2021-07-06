@@ -23,3 +23,10 @@ Python (3.4 or later) must be installed on the user's computer to run the progra
 ## Output format
 
 The format of the output files are described [there](https://github.com/mcsltd/ecganncompare/blob/master/docs/formats.md#input-files-format).
+Annotations from the CSV are converted into text form and written in the `comment` field. The rest of the fields are filled in as follows
+- `type`: STANDARD,
+- `annotator`: PTB-XL annotators,
+- `database`: PTB-XL ECG Dataset,
+- `conclusionThesaurus`: PTB-XL,
+- `conclusions`: _empty field, []_,
+- `record`: _record id_.
